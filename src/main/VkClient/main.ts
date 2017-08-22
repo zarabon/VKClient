@@ -1,6 +1,6 @@
 import {chatCore} from './ChatModule'
 import {VkClient} from './ChatModule/domain/VkClient'
-import {LocalServer} from "./login/server/LocalServer";
+import {LocalServer} from "./LocalServer/LocalServer";
 
 /**
  * Main VkClient interface for comunication with logic using this 

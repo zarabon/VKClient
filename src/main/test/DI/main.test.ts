@@ -2,7 +2,7 @@
 import {suite, test, slow, timeout, it} from 'mocha-typescript'
 import {DIContainer} from "../../VkClient/DI/DIContainer"
 import * as assert from "assert";
-import {LocalServer} from "../../VkClient/login/server/LocalServer";
+import {LocalServer} from "../../VkClient/LocalServer/LocalServer";
 
 @suite
 class DIContainerTest {

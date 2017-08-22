@@ -1,5 +1,5 @@
 import {NoSuchClassIntanseExeption} from "./NoSuchClassIntanseExeption";
-import {LocalServer} from "../login/server/LocalServer";
+import {LocalServer} from "../LocalServer/LocalServer";
 import {InstanceAlreadyExists} from "./InstanceAlreadyExists";
 import {ErrorService} from "../ErrorsHandling/ErrorService";
 

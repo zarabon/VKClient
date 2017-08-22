@@ -1,5 +1,5 @@
 import {suite, test, slow, timeout} from 'mocha-typescript'
-import {LocalServer} from "../../../VkClient/login/server/LocalServer";
+import {LocalServer} from "../../../VkClient/LocalServer/LocalServer";
 
 @suite()
 export class LoginServerTest{
