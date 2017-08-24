@@ -67,6 +67,8 @@
     "mocha-typescript": "^1.1.7",
     "morgan": "^1.8.2",
     "opn": "^5.1.0",
+    "redux": "^3.7.2",
+    "redux-ts": "^2.5.2",
     "ts-loader": "^2.3.2",
     "typescript": "^2.4.2",
     "vue": "^2.3.3",

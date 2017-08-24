@@ -7,14 +7,15 @@ export class Token{
     private _userId:string;
     private _generationTime:number;
     private _expireTime:number;
+    private _access_token:string;
 
 
-    constructor(userId: string, generationDate?, expireTime?) {
+    constructor(userId: string,access_token: string, generationTime?: number, expireTime?: number, ) {
         this._userId = userId;
-        this._generationTime = generationDate;
+        this._generationTime = generationTime;
         this._expireTime = expireTime;
+        this._access_token = access_token;
     }
-
 
     get userId(): string {
         return this._userId;
@@ -38,5 +39,13 @@ export class Token{
 
     set expireTime(value) {
         this._expireTime = value;
+    }
+
+    get access_token(): string {
+        return this._access_token;
+    }
+
+    set access_token(value: string) {
+        this._access_token = value;
     }
 }

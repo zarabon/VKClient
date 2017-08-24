@@ -7,9 +7,6 @@ import {
 const ipc = require('electron').ipcMain
 
 import {vkClient}  from './VkClient/main'
-import {Route} from "./VkClient/LocalServer/router/Route";
-import {RouteMethodsTypes} from "./VkClient/LocalServer/router/RouteMethodsTypes";
-
 
 //let vk = require('./VkClient')
 /**
@@ -58,10 +55,6 @@ app.on('activate', () => {
 
 ipc.on('synchronous-message',function (event, arg) {
     event.returnValue = vkClient;
-    vkClient.server.startServer(null,new Route(RouteMethodsTypes.GET,"/",(req,res,next)=>{
-        res.json({test: "hello"});
-        return null
-    }))
 });
 
 const opn = require('opn');

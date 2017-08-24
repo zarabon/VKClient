@@ -15,8 +15,9 @@
     import AppHeaderComponent from '../HeaderComponent/AppHeaderComponent.vue'
     import Component from 'vue-class-component'
     import Vue from 'vue'
+    import router from '../../router/index'
+    import {ipcRenderer} from 'electron'
 
-    const ipc_render = require('electron').ipcRenderer
 
     @Component({
         props: {},
@@ -25,11 +26,12 @@
         },
         watch: {
             userlUrl: function (newVal) {
-                let retObj = getTokenFromUrl.call(this, this.userlUrl)
-                if (retObj.isOk) {
-                    this.userToken = retObj
+                let tokenObj = getTokenFromUrl.call(this, this.userlUrl)
+                if (tokenObj.isOk) {
+                    this.userToken = tokenObj
                     this.errorMessage = ''
                     this.isInputLocked = true
+                    tokenSucessfulGot(tokenObj)
                 }
 
             }
@@ -57,12 +59,13 @@
         errorMessage = ''
 
         openBrowserLogin() {
-            ipc_render.send('open-browser-login', 'login')
+            ipcRenderer.send('open-browser-login', 'login')
         }
 
 
     }
     /**@desc parse url inserted by user for getting token information
+     * @private
      * @param url:string
      * @returns {
                 isOk: bool,
@@ -96,6 +99,15 @@
             expires_in: parseInt(regArr[2]),
             user_id: regArr[3]
         }
+    }
+
+    /**
+     * @desc call this function when got token from user and it will redirect to start page and save token info to the store
+     * @param token
+     * @private
+     */
+    function tokenSucessfulGot(token){
+        router.push('/')
     }
 </script>
 
