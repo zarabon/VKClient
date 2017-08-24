@@ -15,7 +15,6 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
-const tsConfig = require('./webpack.ts.config')
 
 const _ = require('lodash');
 

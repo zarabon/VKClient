@@ -63,6 +63,11 @@ ipc.on('synchronous-message',function (event, arg) {
         return null
     }))
 });
+
+const opn = require('opn');
+ipc.on('open-browser-login',function () {
+    opn('https://oauth.vk.com/authorize?client_id=6159630&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=4098&response_type=token&v=5.67')
+})
 /**
  * Auto Updater
  *

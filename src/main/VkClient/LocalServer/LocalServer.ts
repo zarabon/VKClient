@@ -8,7 +8,7 @@ import {Route} from "./router/Route";
 import {RouterFacade} from "./router/RouterFacade";
 import {RouterFacadeFactory} from "./router/RouterFacadeFactory";
 
-/// <reference path="../../../../node_modules/@types/body-parser/index.d.ts" />
+/// <reference path="@types/body-parser/index.d.ts" />
 import {json,urlencoded} from "body-parser"
 /// <reference path="@types/express/index.d.ts" />
 import * as express from "express"
@@ -30,9 +30,9 @@ export class LocalServer {
 
     private errorService: ErrorService;
 
-    constructor() {
+    constructor(...routes) {
         this.routerFacade = RouterFacadeFactory.createRouter()
-
+        this.addMultipleRoutes(routes)
     }
 
     public addRoute(route: Route) {
@@ -45,10 +45,7 @@ export class LocalServer {
         if (this._isStartred)
             return
 
-        for (let route of routes) {
-            let lroute = route as Route
-            this.routerFacade.addRoute(lroute)
-        }
+        this.addMultipleRoutes(routes)
 
         this.initializeExpressServer(port ? port : this.port)
 
@@ -93,7 +90,13 @@ export class LocalServer {
                 throw error;
         }
     }
-
+    //this function added to avoid same code in constructor and startServer
+    private addMultipleRoutes(routes){
+        for (let route of routes) {
+            let lroute = route as Route
+            this.routerFacade.addRoute(lroute)
+        }
+    }
 
     get isStartred(): boolean {
         return this._isStartred;
