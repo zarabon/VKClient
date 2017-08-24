@@ -1,8 +1,8 @@
 import {suite, test, slow, timeout} from 'mocha-typescript'
-import {TokenRightsChecker} from "../../VkClient/LoginModule/TokenRightsChecker/TokenRightsChecker";
-import {Token} from "../../VkClient/LoginModule/TokenRightsChecker/domain/Token";
+import {TokenRightsChecker} from "../../VkClient/APIServerCominicator/TokenRightsChecker/TokenRightsChecker";
+import {Token} from "../../VkClient/APIServerCominicator/TokenRightsChecker/domain/Token";
 import * as assert from "assert";
-import {TokenRights} from "../../VkClient/LoginModule/TokenRightsChecker/TokenRights";
+import {TokenRights} from "../../VkClient/APIServerCominicator/TokenRightsChecker/TokenRights";
 
 @suite(timeout(10000))
 export class LoginServerTest {

@@ -107,7 +107,7 @@
      * @private
      */
     function tokenSucessfulGot(token){
-        router.push('/')
+        //router.push('/')
     }
 </script>
 

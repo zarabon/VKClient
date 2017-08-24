@@ -1,4 +1,4 @@
-import {Token} from "../LoginModule/TokenRightsChecker/domain/Token";
+import {Token} from "./TokenRightsChecker/domain/Token";
 import {handleRespError} from "./ResponseErrorhandler";
 
 const MESSAGES_CHECK_URL: string = `https://api.vk.com/method/messages.getDialogs?count=1`
