@@ -2,9 +2,9 @@ import {MainEvents as me} from "./events/MainEvents";
 import {RenderEvents as re} from "./events/RenderEvents";
 import {LoginingService} from "../LoginModule/LoginingService";
 import {MainProcEventEmitter} from "./MainProcEventEmitter";
-import tokenRightsChecker from "../APIServerCominicator/TokenRightsChecker/index";
-import {TokenRights} from "../APIServerCominicator/TokenRightsChecker/TokenRights";
-import {Token} from "../APIServerCominicator/TokenRightsChecker/domain/Token";
+import tokenRightsChecker from "../APIServerCominicator/TokenRightsComunicator/index";
+import {TokenRights} from "../APIServerCominicator/TokenRightsComunicator/TokenRights";
+import {Token} from "../APIServerCominicator/TokenRightsComunicator/domain/Token";
 import loginingService from "../LoginModule/index";
 
 
@@ -31,7 +31,7 @@ export function handleRenderProсessEvents() {
             //TODO add emitting error to render process if token not valid
                 return
 
-            tokenRightsChecker.checkTokenRights(tokenObj, TOKEN_PERMISSIONS)
+            loginingService.checkTokenRights(tokenObj, TOKEN_PERMISSIONS)
                 .then(isTokenHavePermissions => {
                     if (isTokenHavePermissions) {
                         loginingService.registerUserTokenToStorage(tokenObj)

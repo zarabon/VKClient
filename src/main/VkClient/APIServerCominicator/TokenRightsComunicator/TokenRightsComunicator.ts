@@ -6,21 +6,9 @@ const httpRequest = require('http_request');
 
 const RIGHTS_CHECK_URL = 'https://api.vk.com/method/account.getAppPermissions?user_id='
 
-export class TokenRightsChecker {
+export class TokenRightsCominicator {
 
-    public async checkTokenRights(token: Token, rights: Array<TokenRights>): Promise<boolean> {
-
-        let bitMask = await this.getPermissionMaskFromAPIServer(token)
-
-        let computeRightsMask = rights.reduce((sum, right) => {
-            return sum + right
-        }, 0)
-
-        //checking using bitmask if app have enough privileges
-        return (bitMask & computeRightsMask ) === computeRightsMask
-    }
-
-    private async getPermissionMaskFromAPIServer(token: Token): Promise<number> {
+    public async getPermissionMaskFromAPIServer(token: Token): Promise<number> {
         let url = RIGHTS_CHECK_URL + token.userId + `&access_token=${token.accessToken}`
 
         let resp
