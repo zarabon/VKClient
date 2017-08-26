@@ -13,4 +13,5 @@ export const reducers: ReducersMapObject = {
 const store:Store<StoreState> = new StoreBuilder<StoreState>()
     .withReducersMap(reducers)
     .build()
+
 export default store

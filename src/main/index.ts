@@ -7,7 +7,7 @@ import {
 const ipc = require('electron').ipcMain
 
 import {vkClient}  from './VkClient/main'
-import {LoginingService} from "./VkClient/LoginModule/LoginingService";
+import appLifeCycle from './VkClient/AppRunner'
 
 //let vk = require('./VkClient')
 /**
@@ -58,10 +58,7 @@ ipc.on('synchronous-message',function (event, arg) {
     event.returnValue = vkClient;
 });
 
-const opn = require('opn');
-ipc.on('open-browser-login',function () {
-    LoginingService.openUserBrowserWithToken()
-})
+appLifeCycle.start()
 /**
  * Auto Updater
  *

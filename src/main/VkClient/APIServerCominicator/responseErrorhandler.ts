@@ -1,4 +1,5 @@
 import {LoginingService} from "../LoginModule/LoginingService";
+import loginingService from "../LoginModule/index";
 
 const USER_AUTHORIZATION_FAILED_CODE = 5
 
@@ -16,9 +17,8 @@ export function handleRespError(respBody){
 
     switch (error.error_code) {
         case USER_AUTHORIZATION_FAILED_CODE : {
-            LoginingService.invalidateUserLogged()
+            loginingService.invalidateUserLogged()
             //todo add logging error to the logger
         }
     }
-
 }

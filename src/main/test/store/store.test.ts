@@ -13,7 +13,7 @@ export class StoreTest {
         store.dispatch(new SetToken(new Token('id','token')))
         store.dispatch(new SetToken(new Token('id','token2')))
         store.dispatch(new SetLogged(true))
-        assert.ok(store.getState().userData.token.access_token == 'token2')
+        assert.ok(store.getState().userData.token.accessToken == 'token2')
         assert.ok(store.getState().userData.isLogged)
     }
 }

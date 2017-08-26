@@ -59,7 +59,7 @@
         errorMessage = ''
 
         openBrowserLogin() {
-            ipcRenderer.send('open-browser-login', 'login')
+            ipcRenderer.send('OPEN_BROWSER_LOGIN', null)
         }
 
 
