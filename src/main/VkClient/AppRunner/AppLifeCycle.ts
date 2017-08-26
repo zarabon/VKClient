@@ -1,14 +1,14 @@
-import {handleRenderProсessEvents}  from '../IPCComunication/index'
+import {handleRenderProсessEvents} from '../IPCComunication/index'
 
 /**
  * Entry point for VKClient(main process)
  */
-export class AppLifeCycle{
-    public start(){
+export class AppLifeCycle {
+    public start() {
 
     }
 
-    constructor(){
+    constructor() {
         //register handling for ipc events from render process
         handleRenderProсessEvents()
     }

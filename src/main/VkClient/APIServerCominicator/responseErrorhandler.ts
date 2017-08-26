@@ -9,7 +9,7 @@ const USER_AUTHORIZATION_FAILED_CODE = 5
  * @desc in case if user token not valid for any reason it call method from LoginModule to invalidate token and user logged
  * @param respBody json answer from  VK API
  */
-export function handleRespError(respBody){
+export function handleRespError(respBody) {
     if (!('error' in respBody))
         return
 

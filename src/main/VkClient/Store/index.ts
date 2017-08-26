@@ -1,4 +1,4 @@
-import {UserDataState,userDataReducer} from './reducers/UserDataReducers'
+import {UserDataState, userDataReducer} from './reducers/UserDataReducers'
 import {ReducersMapObject, Store} from "redux";
 import {StoreBuilder} from "redux-ts";
 
@@ -10,7 +10,7 @@ export const reducers: ReducersMapObject = {
     userData: userDataReducer
 }
 
-const store:Store<StoreState> = new StoreBuilder<StoreState>()
+const store: Store<StoreState> = new StoreBuilder<StoreState>()
     .withReducersMap(reducers)
     .build()
 

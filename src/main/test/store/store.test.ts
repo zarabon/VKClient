@@ -1,9 +1,9 @@
 import {suite, test, slow, timeout} from 'mocha-typescript'
 import store from "../../VkClient/Store/index";
 import {SetLogged, SetToken} from "../../VkClient/Store/actions/UserDataActions";
-import {Token} from "../../VkClient/APIServerCominicator/TokenRightsComunicator/domain/Token";
+import {Token} from "../../VkClient/LoginModule/domain/Token";
 import * as assert from "assert";
-import {TokenRights} from "../../VkClient/APIServerCominicator/TokenRightsComunicator/TokenRights";
+import {TokenRights} from "../../VkClient/LoginModule/TokenRights";
 
 
 @suite(timeout(10000))

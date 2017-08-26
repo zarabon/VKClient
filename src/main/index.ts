@@ -6,7 +6,7 @@ import {
 
 const ipc = require('electron').ipcMain
 
-import {vkClient}  from './VkClient/main'
+import {vkClient} from './VkClient/main'
 import appLifeCycle from './VkClient/AppRunner'
 
 //let vk = require('./VkClient')
@@ -54,7 +54,7 @@ app.on('activate', () => {
     }
 })
 
-ipc.on('synchronous-message',function (event, arg) {
+ipc.on('synchronous-message', function (event, arg) {
     event.returnValue = vkClient;
 });
 

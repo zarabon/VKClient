@@ -6,8 +6,8 @@ const dialog = require('electron').dialog
 
 export class ErrorService {
 
-    public showErrorDialog(err:SystemError){
-        dialog.showErrorBox(`Error ${err.code==null?'unknown code':err.code}`, err.message)
+    public showErrorDialog(err: SystemError) {
+        dialog.showErrorBox(`Error ${err.code == null ? 'unknown code' : err.code}`, err.message)
     }
 
 }

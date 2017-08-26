@@ -1,5 +1,4 @@
-import {TokenRights} from "./TokenRights";
-import {Token} from "./domain/Token";
+import {Token} from "../../LoginModule/domain/Token";
 import {handleRespError} from "../responseErrorhandler";
 
 const httpRequest = require('http_request');

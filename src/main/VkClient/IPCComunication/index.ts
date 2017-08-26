@@ -1,16 +1,9 @@
-import {MainEvents as me} from "./events/MainEvents";
 import {RenderEvents as re} from "./events/RenderEvents";
-import {LoginingService} from "../LoginModule/LoginingService";
 import {MainProcEventEmitter} from "./MainProcEventEmitter";
-import tokenRightsChecker from "../APIServerCominicator/TokenRightsComunicator/index";
-import {TokenRights} from "../APIServerCominicator/TokenRightsComunicator/TokenRights";
-import {Token} from "../APIServerCominicator/TokenRightsComunicator/domain/Token";
 import loginingService from "../LoginModule/index";
+import {ipcMain} from 'electron'
+import {saveToken} from "./eventsHandlers/saveToken";
 
-
-//TODO place this in settings in store
-const TOKEN_PERMISSIONS = [TokenRights.FRIENDS, TokenRights.GROUPS, TokenRights.MESSAGES]
-const ipc = require('electron').ipcMain
 
 /**
  * Register all ipc events
@@ -18,50 +11,15 @@ const ipc = require('electron').ipcMain
 
 //handling render process events
 export function handleRenderProсessEvents() {
-    ipc
+    ipcMain
 
     //open browser with authorization windows
         .on(re.OPEN_BROWSER_LOGIN, () => loginingService.openUserBrowserWithToken())
 
         //adding token from render process to main process storage
         .on(re.SAVE_TOKEN, token => {
-
-            let tokenObj = convertJSONTokenToToken(token)
-            if (tokenObj === null)
-            //TODO add emitting error to render process if token not valid
-                return
-
-            loginingService.checkTokenRights(tokenObj, TOKEN_PERMISSIONS)
-                .then(isTokenHavePermissions => {
-                    if (isTokenHavePermissions) {
-                        loginingService.registerUserTokenToStorage(tokenObj)
-                    } else {
-                        //TODO add emitting error to render process if token have not enough permissions
-                    }
-                })
+            saveToken(token)
         })
-}
-
-/**
- *
- * @param token - json from render process
- * @return {Token}
- * @return null if param not valid
- */
-function convertJSONTokenToToken(token): Token {
-    //check if @param token has no fields accessToken and userId and return null
-    if (!(('userId' in token) && ('accessToken' in token))) {
-        return null
-    }
-
-    let retToken: Token = new Token(token['userId'], token['accessToken'])
-
-    retToken.expireTime = 'expireTime' in token ? token['expireTime'] : null
-    retToken.generationTime = 'generationTime' in token ? token['generationTime'] : null
-
-    return retToken
-
-
 }
 
 //emitting events from main process

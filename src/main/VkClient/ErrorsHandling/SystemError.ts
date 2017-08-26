@@ -1,6 +1,6 @@
-export class SystemError{
-    private _message:string;
-    private _code:string;
+export class SystemError {
+    private _message: string;
+    private _code: string;
 
     constructor(message: string, code?: string) {
         this._message = message;

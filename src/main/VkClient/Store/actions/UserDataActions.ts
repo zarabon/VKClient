@@ -1,5 +1,5 @@
-import { SyncAction, AsyncAction } from 'redux-ts'
-import {Token} from "../../APIServerCominicator/TokenRightsComunicator/domain/Token";
+import {SyncAction, AsyncAction} from 'redux-ts'
+import {Token} from "../../LoginModule/domain/Token";
 
 export class SetToken extends SyncAction {
     constructor(public token: Token) {

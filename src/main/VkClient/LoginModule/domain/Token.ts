@@ -1,16 +1,15 @@
-
 /**
  * Entity class for token
  * time in unixtame
  * */
-export class Token{
-    private _userId:string;
-    private _generationTime:number;
-    private _expireTime:number;
-    private _accessToken:string;
+export class Token {
+    private _userId: string;
+    private _generationTime: number;
+    private _expireTime: number;
+    private _accessToken: string;
 
 
-    constructor(userId: string,accessToken: string, generationTime?: number, expireTime?: number, ) {
+    constructor(userId: string, accessToken: string, generationTime?: number, expireTime?: number,) {
         this._userId = userId;
         this._generationTime = generationTime;
         this._expireTime = expireTime;

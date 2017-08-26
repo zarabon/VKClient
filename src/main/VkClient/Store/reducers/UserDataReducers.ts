@@ -1,4 +1,4 @@
-import {Token} from "../../APIServerCominicator/TokenRightsComunicator/domain/Token";
+import {Token} from "../../LoginModule/domain/Token";
 import {ReducerBuilder} from "redux-ts";
 import {SetLogged, SetToken} from "../actions/UserDataActions";
 
