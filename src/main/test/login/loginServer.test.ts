@@ -47,7 +47,7 @@ export class LoginServerTest {
                 }
             })
                 .then(resp => {
-
+                    //console.log(resp.getBody())
                     resolve(true)
                 })
         })

@@ -7,8 +7,14 @@ export class ChatMessage extends Message {
     private _chat_active: Array<number>
     private _users_count: string
     private _admin_id: number
+    private _photo_50_url: string
+    private _photo_100_url: string
+    private _photo_200_url: string
 
-    constructor(id: number, date: number, isOutgoing: boolean, userId: number, readState: boolean, title: string, body: string, random_id: number, action: string, action_mid: number, chat_id: number, chat_active: Array<number>, users_count: string, admin_id: number) {
+    constructor(id: number, date: number, isOutgoing: boolean, userId: number, readState: boolean,
+                title: string, body: string, random_id: number, action: string, action_mid: number,
+                chat_id: number, chat_active: Array<number>, users_count: string, admin_id: number,
+                photo_50_url: string, photo_100_url: string, photo_200_url: string) {
         super(id, date, isOutgoing, userId, readState, title, body, random_id);
         this._action = action;
         this._action_mid = action_mid;
@@ -16,6 +22,9 @@ export class ChatMessage extends Message {
         this._chat_active = chat_active;
         this._users_count = users_count;
         this._admin_id = admin_id;
+        this._photo_50_url = photo_50_url;
+        this._photo_100_url = photo_100_url;
+        this._photo_200_url = photo_200_url;
     }
 
 

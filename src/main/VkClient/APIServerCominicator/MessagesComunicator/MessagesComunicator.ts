@@ -75,6 +75,9 @@ export class MessagesComunicator implements Comunicator {
                 .setChat_active(obj['chat_active'])
                 .setUsers_count(obj['users_count'])
                 .setAdmin_id(obj['admin_id'])
+                .setPhoto_50_url(obj['photo_50'])
+                .setPhoto_100_url(obj['photo_100'])
+                .setPhoto_200_url(obj['photo_200'])
                 .build()
         } else {
             return MessageBuilder.newBuilder()

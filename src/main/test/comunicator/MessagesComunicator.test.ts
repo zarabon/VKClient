@@ -16,7 +16,7 @@ export class MessagesComunicatorTest{
             settings.version = '5.68'
             settings.token = TOKEN
             messagesComunicator.setCommunicatorSettings(settings)
-            messagesComunicator.getDialogs(4)
+            messagesComunicator.getDialogs(20)
                 .then(res => {
                     res.forEach(message=>{
                         let mes:ChatMessage = message as ChatMessage
