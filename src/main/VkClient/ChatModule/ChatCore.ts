@@ -1,6 +1,6 @@
 import {Chat} from './domain/Chat'
 
 export interface ChatCore{
-    getChats()
+    getDialogs()
     getMessages(chat:Chat)
 }

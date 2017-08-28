@@ -9,7 +9,7 @@ const opn = require('opn');
 
 //TODO place this in settings in store
 const TOKEN_PERMISSIONS = [TokenRights.FRIENDS, TokenRights.GROUPS, TokenRights.MESSAGES]
-const TOKEN_PERMISSIONS_BITMASK = TokenRights.FRIENDS + TokenRights.GROUPS + TokenRights.MESSAGES
+const TOKEN_PERMISSIONS_BITMASK:number = TokenRights.FRIENDS + TokenRights.GROUPS + TokenRights.MESSAGES
 const MY_APP_ID = '6159630'
 const API_VERSION = '5.67'
 
@@ -21,7 +21,7 @@ export class LoginingService {
      * */
     public openUserBrowserWithToken() {
         let url = `https://oauth.vk.com/authorize?client_id=${MY_APP_ID}&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=${TOKEN_PERMISSIONS_BITMASK}&response_type=token&v=${API_VERSION}'`
-
+        console.log(url);
         opn(url)
     }
 

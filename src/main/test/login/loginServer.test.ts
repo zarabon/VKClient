@@ -4,37 +4,50 @@ import * as assert from "assert";
 import {TokenRights} from "../../VkClient/LoginModule/TokenRights";
 import loginingService from "../../VkClient/LoginModule/index";
 
-@suite(timeout(10000))
+const USER_ID = '83973489'
+const TOKEN_PERMISSIONS_BITMASK = TokenRights.FRIENDS + TokenRights.GROUPS + TokenRights.MESSAGES
+const TOKEN = '1c04697eb3f53aab4e71687faaec9cccca9da5d8856dc3ae64beba645d93f1c8453bfc03f144ab3feb99a';
+const API_VERSION = '5.67'
+@suite(timeout(5000))
 export class LoginServerTest {
+
     @test
     checkPriviledges(): Promise<boolean> {
-        const TOKEN_PERMISSIONS_BITMASK = TokenRights.FRIENDS + TokenRights.GROUPS + TokenRights.MESSAGES
-
         return new Promise(resolve => {
             loginingService.checkTokenRights(
-                new Token('83973489', 'a9820027b2c6d0d3d457a9e91004fe25e5593f9183f7028130a3a9028ad66324eb3cd669396726fc15469'),
+                new Token('83973489', TOKEN),
                 [TokenRights.FRIENDS, TokenRights.GROUPS, TokenRights.MESSAGES])
                 .then(value => {
                     console.error(value);
                     assert.ok(value)
-                    resolve(value)
+
+                    let httpRequest = require('http_request')
+                    httpRequest.request(`https://api.vk.com/method/account.getAppPermissions?user_id=${USER_ID}&access_token=${TOKEN}&v=${API_VERSION}`,{
+                        method: 'POST'
+                    })
+                        .then(resp=>{
+                            console.log(resp.getBody());
+                            resolve(value)
+                        })
                 })
                 .catch(e => {
                     console.log(e);
                 })
         })
-
     }
 
     @test
     public requestTest2(): Promise<boolean> {
         return new Promise(resolve => {
             let httpRequest = require('http_request')
-            httpRequest.request(`https://api.vk.com/method/messages.getDialogs?count=1&access_token=27114a102c744ef7fc150dbcc30f4e207a56539e1e28a2520d3c2eee60523f1cf15f22cd49617a7e4b2b9`, {
-                method: 'POST'
+            httpRequest.request(`https://api.vk.com/method/messages.getDialogs`, {
+                method: 'GET',
+                body:{
+                    access_token:TOKEN
+                }
             })
                 .then(resp => {
-                    console.log(resp.getBody())
+
                     resolve(true)
                 })
         })

@@ -1,7 +1,7 @@
 import {ChatCore} from './ChatCore'
 
 export class ChatCoreImpl implements ChatCore{
-    getChats(){
+    getDialogs(){
         return 'test'
     }
 
