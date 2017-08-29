@@ -6,6 +6,8 @@
 </template>
 
 <script>
+    import {mapState} from "vuex";
+
     let AppHeaderComponent = require('./HeaderComponent/AppHeaderComponent.vue')
     import Component from 'vue-class-component'
     import Vue from 'vue'
@@ -16,7 +18,7 @@
         }
     })
 
-    export default class LandingPage extends Vue{
+    export default class LandingPage extends Vue {
     }
 </script>
 

@@ -18,7 +18,7 @@
     import Vue from 'vue'
     import router from '../../router/index'
     import {ipcRenderer} from 'electron'
-
+    import {mapState} from 'vuex'
 
     @Component({
         props: {},
@@ -36,6 +36,11 @@
                 }
 
             }
+        },
+        computed: {
+            ...mapState({
+                isLogged: state => state.isLogged
+            })
         }
 
     })
@@ -67,6 +72,7 @@
 
 
     }
+
     /**@desc parse url inserted by user for getting token information
      * @private
      * @param url:string
@@ -109,13 +115,14 @@
      * @param token
      * @private
      */
-    function tokenSucessfulGot(tokenObj){
-        ipcRenderer.send('SAVE_TOKEN',{
-            userId:tokenObj.user_id,
-            accessToken:tokenObj.token
+    function tokenSucessfulGot(tokenObj) {
+        ipcRenderer.send('SAVE_TOKEN', {
+            userId: tokenObj.user_id,
+            accessToken: tokenObj.token
         })
         this.loading = true
-        ipcRenderer.once('TOKEN_SAVED', ()=>{
+        Vue.$data.is
+        ipcRenderer.once('TOKEN_SAVED', () => {
             router.push('/')
         });
     }
@@ -140,17 +147,16 @@
         font-size: 13px;
     }
 
-    .loading{
-        top:50%;
+    .loading {
+        top: 50%;
         left: 50%;
         position: absolute;
         margin-top: -150px;
         margin-left: -150px;
 
-
     }
 
-    #loading-gif{
+    #loading-gif {
         height: 300px;
         width: 300px;
     }

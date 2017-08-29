@@ -5,13 +5,15 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
-Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-new Vue({
+
+let vue_isnt = new Vue({
+    store,
     components: {App},
     router,
-    store,
+    axios,
     template: '<App/>'
 }).$mount('#app')
+/* eslint-disable no-new */
+
+export default store
