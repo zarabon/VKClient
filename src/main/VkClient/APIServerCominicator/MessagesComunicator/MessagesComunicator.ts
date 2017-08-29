@@ -4,13 +4,14 @@ import {ChatMessage} from "./domain/ChatMessage";
 import {ChatMessageBuilder} from "./builders/ChatMessageBuilder";
 import {MessageBuilder} from "./builders/MessageBuilder";
 import {ComunicatorSettings} from "../CommunicatorSettings";
+import {handleRespError} from "../responseErrorhandler";
 
 const httpRequest = require('http_request')
 
 const GET_DIALOGS_URL = 'https://api.vk.com/method/messages.getDialogs'
 
 export class MessagesComunicator implements Comunicator {
-    private communicatorSettings: ComunicatorSettings;
+    private communicatorSettings: ComunicatorSettings = new ComunicatorSettings;
 
     getDialogs(count: number, start_message_id?: number, offset?: number, unread?: boolean, important?: boolean, unanswered?: boolean, preview_length?: number): Promise<Array<Message>> {
         return new Promise((resolve, reject) => {
@@ -21,11 +22,11 @@ export class MessagesComunicator implements Comunicator {
                     count: count,
                     v: this.communicatorSettings.version,
                     start_message_id: start_message_id,
-                    offset:offset,
-                    unread:unread===true?1:0,
-                    important:important===true?1:0,
-                    unanswered:unanswered===true?1:0,
-                    preview_length:preview_length
+                    offset: offset,
+                    unread: unread === true ? 1 : 0,
+                    important: important === true ? 1 : 0,
+                    unanswered: unanswered === true ? 1 : 0,
+                    preview_length: preview_length
 
                 }
             }).then(resp => {
@@ -33,7 +34,12 @@ export class MessagesComunicator implements Comunicator {
                 if (('response' in respBody) && ('items' in respBody.response)) {
                     resolve(this.parseRespItemsToMessages(respBody.response.items))
                 } else {
-                    reject(resp.getBody())
+                    let error = handleRespError(respBody)
+                    if (error === null) {
+                        throw new Error('No way!Critical system error')
+                    } else {
+                        reject(error)
+                    }
                 }
             })
             //TODO add checking error

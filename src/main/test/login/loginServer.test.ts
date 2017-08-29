@@ -6,7 +6,7 @@ import loginingService from "../../VkClient/LoginModule/index";
 
 const USER_ID = '83973489'
 const TOKEN_PERMISSIONS_BITMASK = TokenRights.FRIENDS + TokenRights.GROUPS + TokenRights.MESSAGES
-const TOKEN = '1c04697eb3f53aab4e71687faaec9cccca9da5d8856dc3ae64beba645d93f1c8453bfc03f144ab3feb99a';
+const TOKEN = '90eb770a8fbb307c2980988ff12baa713086104fc6970650785e4599b80e0a08bebcd6f4691f554bfa48e';
 const API_VERSION = '5.67'
 @suite(timeout(5000))
 export class LoginServerTest {

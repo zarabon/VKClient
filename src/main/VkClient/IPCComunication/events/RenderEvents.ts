@@ -3,5 +3,6 @@
  */
 export enum RenderEvents{
     OPEN_BROWSER_LOGIN = 'OPEN_BROWSER_LOGIN',
-    SAVE_TOKEN = 'SAVE_TOKEN'
+    SAVE_TOKEN = 'SAVE_TOKEN',
+    GET_DIALOGS = 'GET_DIALOGS'
 }

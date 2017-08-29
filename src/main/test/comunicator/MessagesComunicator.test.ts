@@ -4,7 +4,7 @@ import {Message} from "../../VkClient/APIServerCominicator/MessagesComunicator/d
 import {ComunicatorSettings} from "../../VkClient/APIServerCominicator/CommunicatorSettings";
 import {ChatMessage} from "../../VkClient/APIServerCominicator/MessagesComunicator/domain/ChatMessage";
 
-const TOKEN = '1c04697eb3f53aab4e71687faaec9cccca9da5d8856dc3ae64beba645d93f1c8453bfc03f144ab3feb99a';
+const TOKEN = '90eb770a8fbb307c2980988ff12baa713086104fc6970650785e4599b80e0a08bebcd6f4691f554bfa48e';
 
 @suite(timeout(3000))
 export class MessagesComunicatorTest{
@@ -20,12 +20,11 @@ export class MessagesComunicatorTest{
                 .then(res => {
                     res.forEach(message=>{
                         let mes:ChatMessage = message as ChatMessage
-                        console.log(mes);
+                        console.log(JSON.stringify(mes) +"\n");
                     })
                     resolve(true)
                 })
                 .catch(e=>console.log(e))
         })
-
     }
 }

@@ -3,6 +3,7 @@ import {MainProcEventEmitter} from "./MainProcEventEmitter";
 import loginingService from "../LoginModule/index";
 import {ipcMain} from 'electron'
 import {saveToken} from "./eventsHandlers/saveToken";
+import {getDialogs} from "./eventsHandlers/getDialogs";
 
 
 /**
@@ -17,8 +18,12 @@ export function handleRenderProсessEvents() {
         .on(re.OPEN_BROWSER_LOGIN, () => loginingService.openUserBrowserWithToken())
 
         //adding token from render process to main process storage
-        .on(re.SAVE_TOKEN, token => {
+        .on(re.SAVE_TOKEN, (event,token) => {
             saveToken(token)
+        })
+
+        .on(re.GET_DIALOGS, (event,obj) => {
+            getDialogs(obj)
         })
 }
 

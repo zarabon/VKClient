@@ -1,15 +1,15 @@
-const ipc = require('electron').ipcMain
 import {MainEvents, MainEvents as me} from "./events/MainEvents";
+import {AppLifeCycle} from "../AppRunner/AppLifeCycle";
 
 export class MainProcEventEmitter {
     /**
      * @desc emmit ipc event to render process
      * @param {MainEvents} event
-     * @param {(...p) => void} cb
+     * @param obj
      * @return {MainProcEventEmitter}
      */
-    emitEvent(event: MainEvents, cb: (...p) => void): MainProcEventEmitter {
-        ipc.emit(event, cb)
+    emitEvent(event: MainEvents, obj:any): MainProcEventEmitter {
+        AppLifeCycle.inst.electronManager.mainWindow.webContents.send(event,obj)
         return this
     }
 }

@@ -3,7 +3,7 @@ import state from '../Store'
 import {SetLogged, SetToken} from "../Store/actions/UserDataActions";
 import {ipcMain} from 'electron'
 import {TokenRights} from "./TokenRights";
-import tokenRightsComunicator from "../APIServerCominicator/TokenRightsComunicator/index";
+import tokenRightsComunicator from "../APIServerCominicator/AccountComunicator/index";
 
 const opn = require('opn');
 
@@ -21,7 +21,6 @@ export class LoginingService {
      * */
     public openUserBrowserWithToken() {
         let url = `https://oauth.vk.com/authorize?client_id=${MY_APP_ID}&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=${TOKEN_PERMISSIONS_BITMASK}&response_type=token&v=${API_VERSION}'`
-        console.log(url);
         opn(url)
     }
 
@@ -32,9 +31,8 @@ export class LoginingService {
      * @param {Array<TokenRights>} rights
      * @return {Promise<boolean>}
      */
-    public async checkTokenRights(token: Token, rights: Array<TokenRights>): Promise<boolean> {
-
-        let bitMask = await tokenRightsComunicator.getPermissionMaskFromAPIServer(token)
+    public async checkTokenRights(token:Token,rights: Array<TokenRights>): Promise<boolean> {
+        let bitMask = await tokenRightsComunicator.getPermissionMask(token.userId,token.accessToken)
 
         let computeRightsMask = rights.reduce((sum, right) => {
             return sum + right
@@ -46,7 +44,6 @@ export class LoginingService {
 
     /**
      * Adding using info to the storage,
-     * @warn use this only if token has been checked
      * */
     public registerUserTokenToStorage(token: Token) {
         state.dispatch(new SetToken(token))

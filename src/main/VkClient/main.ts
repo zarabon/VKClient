@@ -1,4 +1,4 @@
-import {chatCore} from './ChatModule'
+import chatCore from './ChatModule'
 import {VkClient} from './ChatModule/domain/VkClient'
 
 import {ErrorService} from "./ErrorsHandling/ErrorService";

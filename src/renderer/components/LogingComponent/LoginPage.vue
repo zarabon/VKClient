@@ -8,6 +8,7 @@
                type="text" name="userURL">
         <div class="error-message" v-if="errorMessage!=''">{{errorMessage}}</div>
         <div v-if="userToken" class="token">Your token is : <p>{{userToken.token}}</p> proceeding</div>
+        <div v-if="loading" class="loading"><img id='loading-gif' src="static/tenor.gif" alt=""></div>
     </div>
 </template>
 
@@ -26,12 +27,12 @@
         },
         watch: {
             userlUrl: function (newVal) {
-                let tokenObj = getTokenFromUrl.call(this, this.userlUrl)
+                let tokenObj = parseURL.call(this, this.userlUrl)
                 if (tokenObj.isOk) {
                     this.userToken = tokenObj
                     this.errorMessage = ''
                     this.isInputLocked = true
-                    tokenSucessfulGot(tokenObj)
+                    tokenSucessfulGot.call(this, tokenObj)
                 }
 
             }
@@ -46,6 +47,8 @@
         inputPlaceHolder = "pass here URL from browser"
 
         userlUrl = ""
+
+        loading = false
 
         /**@type {
                 isOk: bool,
@@ -74,7 +77,7 @@
                 user_id: string
             }
      */
-    function getTokenFromUrl(url) {
+    function parseURL(url) {
         let regExp = /#access_token=(\w+)&expires_in=(.*)&user_id=(.+)/g
         let regArr = regExp.exec(url);
 
@@ -106,8 +109,15 @@
      * @param token
      * @private
      */
-    function tokenSucessfulGot(token){
-        //router.push('/')
+    function tokenSucessfulGot(tokenObj){
+        ipcRenderer.send('SAVE_TOKEN',{
+            userId:tokenObj.user_id,
+            accessToken:tokenObj.token
+        })
+        this.loading = true
+        ipcRenderer.once('TOKEN_SAVED', ()=>{
+            router.push('/')
+        });
     }
 </script>
 
@@ -128,6 +138,21 @@
     .token p {
         color: blue;
         font-size: 13px;
+    }
+
+    .loading{
+        top:50%;
+        left: 50%;
+        position: absolute;
+        margin-top: -150px;
+        margin-left: -150px;
+
+
+    }
+
+    #loading-gif{
+        height: 300px;
+        width: 300px;
     }
 
 

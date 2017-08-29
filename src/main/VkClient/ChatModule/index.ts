@@ -4,4 +4,4 @@ import {ChatCore} from "./ChatCore";
 //replace with DI later
 let chatCore:ChatCore = new ChatCoreImpl()
 
-export  {chatCore}
+export  default chatCore
