@@ -19,6 +19,9 @@
     import router from '../../router/index'
     import {ipcRenderer} from 'electron'
     import {mapState} from 'vuex'
+    import {SET_LOGIN} from "../../store/mutationsTypes";
+    import {SET_TOKEN, SET_USER_ID} from "../../store/modules/userInfo/mutationsTypes";
+    import axios from 'axios'
 
     @Component({
         props: {},
@@ -63,6 +66,7 @@
             }
          */
         userToken = false
+
 
         errorMessage = ''
 
@@ -121,10 +125,17 @@
             accessToken: tokenObj.token
         })
         this.loading = true
-        Vue.$data.is
+        this.$root.$store.commit(SET_LOGIN, true)
         ipcRenderer.once('TOKEN_SAVED', () => {
+            this.$root.$store.commit('userInfo/' + SET_TOKEN, tokenObj.token)
+            this.$root.$store.commit('userInfo/' + SET_USER_ID, tokenObj.user_id)
+            setUserToStoreViaRequest(tokenObj.user_id, tokenObj.token)
             router.push('/')
         });
+    }
+
+    async function setUserToStoreViaRequest(userId, token) {
+        //todo make this
     }
 </script>
 
@@ -160,6 +171,4 @@
         height: 300px;
         width: 300px;
     }
-
-
 </style>

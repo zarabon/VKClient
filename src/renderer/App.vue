@@ -6,8 +6,12 @@
 
 <script>
   export default {
-    name: 'chat'
+    name: 'chat',
+
   }
+
+
+
 </script>
 
 <style>

@@ -2,7 +2,7 @@
     <div class="appHeaderComponent">
         <div class="appName">VKClient</div>
         <div class="userInfo" @click="login">
-            <div v-if="isLogged">{userName}</div>
+            <div v-if="isLogged">{{userName}}</div>
             <div class="" v-else>Log in</div>
             <div><img src="static/ic_launcher.png" alt="test img" height="50px" width="70px"></div>
         </div>
@@ -15,34 +15,34 @@
     import Vue from 'vue'
     import router from '../../router/index'
     import {mapGetters, mapState} from "vuex";
-    import store from "../../main";
 
     @Component({
-        computed: {
-            ...mapGetters(['isLogged'])
 
-        }
     })
     export default class AppHeaderComponent extends Vue {
         constructor(){
             super()
-            this.$store = store
         }
 
         login() {
+
             router.push("/login")
         }
 
-//        get isLogged(){
-//
-//            return this.$store.state.isLogged
-//        }
+        get isLogged(){
+            return this.$root.$store.state.isLogged
+        }
+
+        get userName(){
+            console.log(this.$root.$store.state.userInfo.userId);
+            return this.$root.$store.state.userInfo.userId
+        }
     }
 
 
 </script>
 
-<style>
+<style scoped>
     .appHeaderComponent {
         height: 70px;
         background-color: #00B7FF;
