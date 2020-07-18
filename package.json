@@ -63,7 +63,7 @@
     "electron": "^1.7.2",
     "express": "^4.15.4",
     "http_request": "^0.1.2",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "mocha-typescript": "^1.1.7",
     "morgan": "^1.8.2",
     "opn": "^5.1.0",
